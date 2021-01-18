@@ -8,7 +8,7 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-m32", "-g","-o", "p2.exe", "p2.cpp" 
+                "-m32", "-g","-o", "p3.exe", "p3.cpp" 
             ],
             "problemMatcher": [],
             "group": {
