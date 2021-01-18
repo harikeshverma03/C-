@@ -1,0 +1,24 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "echo",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-m32", // required as mingw installed is of 32 bit if 64 bit is installed then not required
+                "-std=c++14",
+                "-g",
+                "-o",
+                "myfile.exe",// the name of exe file you want to give
+                "myfile.cpp" //the name of cpp file
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

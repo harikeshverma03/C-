@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1610103541 source:c:\users\harik\onedrive\documents\c++\maxproductpairwise\main.cpp
+	<iostream>
+	<vector>
+	<bits/stdc++.h>
+	<deque>
+	<cstdlib>
+

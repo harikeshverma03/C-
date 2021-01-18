@@ -1,0 +1,43 @@
+Sequence of steps to do
+  
+    one time:  
+        install a C/C++ complier, add to PATH environment variable  
+        install C/C++ plugin for visual studio code  
+        tell visual studio code where the compiler is and what is the short cut to build and run  
+           these are files under ".vscode" (see below)
+    every project:  
+        crate a project  
+        build project  
+        run project  
+Explaination(one time)
+    A. Install a compiler (if you don't have one already)  
+    Example below, installs MinGW c++ compiler on Windows:  
+    Download from here: https://sourceforge.net/p/mingw-w64/mailman/message/36103143/  
+    1. For windows, I downloaded https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/mingw-w64-v5.0.3.zip  
+    2. unzip mingw-w64-v5.0.3.zip  
+    3. rename unzipped folder to MinGW, Move it to C:\MinGW\  
+    4. verify that you have "C:\MinGW\bin\gcc.exe" director/file, otherwise make necessary change to folder  
+
+    B. Add your compiler to PATH environment variable
+    1. Add "C:\MinGW\bin" to PATH > user environment variable  
+    2. verify gcc command works from cmd  
+        restart your cmd  
+        run below command in 'cmd'  
+            where gcc  
+            The output should be: C:\MinGW\bin\gcc.exe  
+
+    C. Restart your visual studio code  
+    1. install C/C++ plugin, as below:  
+        From Menu  
+             View > Extension  
+        Search & Install below extension  
+            C/C++  
+    Explaination(Every Project)
+        A. Create a below "myproj" folder & files, like below in below structure:  
+            C:\myproj\myfile.cpp  
+            C:\myproj\.vscode\  
+            C:\myproj\.vscode\c_cpp_properties.json  
+            C:\myproj\.vscode\launch.json  
+            C:\myproj\.vscode\settings.json  
+            C:\myproj\.vscode\tasks.json 
+            The data for this files can bee seen in vs codeinstrucions folder

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1610393082 source:c:\users\harik\onedrive\documents\c++\gcd\main.cpp
+	<iostream>
+	<cstdlib>
+	<bits/stdc++.h>
+
