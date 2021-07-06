@@ -8,7 +8,7 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-m32", "-g","-o", "recursion.exe", "recursion.cpp" 
+                "-m32", "-g","-o", "toh.exe", "toh.cpp" 
             ],
             "problemMatcher": [],
             "group": {

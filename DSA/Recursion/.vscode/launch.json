@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/recursion.exe",
+            "program": "${workspaceFolder}/taylorn.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
