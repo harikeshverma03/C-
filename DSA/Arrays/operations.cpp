@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 struct Array{
-    int A[10];
+    int *A;
     int size;
     int length;
 };
@@ -260,29 +260,69 @@ struct Array* DifferenceS(struct Array *arr1, struct Array *arr2){
     return arr3;
 }
 int main(){
-    struct Array arr = {{2,-3,4,-12,7,-10},20,6};
-    struct Array arr1 = {{2,6,10,15,25},10,5};
-    struct Array arr2 = {{3,6,7,15,20},10,5};
-    struct Array *arr3;
+//    struct Array arr = {{2,-3,4,-12,7,-10},20,6};
+//    struct Array arr1 = {{2,6,10,15,25},10,5};
+//    struct Array arr2 = {{3,6,7,15,20},10,5};
+//    struct Array *arr3;
+    struct Array arr;
+    cout << "Enter size of array" << endl;
+    int temp;
+    int x, index;
+    cin >> temp;
+    arr.size = temp;
+    arr.A = new int[temp];
+    arr.length = 0;
+    temp = 1;
+        cout << "Menu" << endl;
+        cout << "-1 End" << endl;
+        cout << "1 Insert" << endl;
+        cout << "2 Delete" << endl;
+        cout << "3 Search" << endl;
+        cout << "4 Sum" << endl;
+        cout << "5 Display" << endl;
+    while (temp > 0 ){
+        cout << "Enter Your choice" << endl;
+        cin >> temp;
+        switch(temp){
+            case -1:
+            break;
+            case 1: cout << "Enter an element and index" << endl;
+            cin >> x >> index;
+            Insert(&arr,index,x);
+            break;
+            case 2:
+            break;
+            case3:
+            cout << BinarySearch(arr, 13) << endl;
+            
+            case 4: cout << "Sum of the elements are:" << Sum(arr) << endl; break;
+            case 5:
+            Display(arr);
+            break;            
+        }
+    }
+    
+    
+
     //Append(&arr, 10);
     //Insert(&arr,3,10);
     //cout << Delete(&arr,2) << endl;
     //int x;
     //cin >> x;
     //cout << "The Sum " << x << " is present at " << Get(arr,x) << endl;
-    Display(arr1);
-    Display(arr2);
-    cout << "The Merged Array ";
+    // Display(arr1);
+    // Display(arr2);
+    //cout << "The Merged Array ";
     //Lshift(&arr);
     //InsertSort(&arr,6);
     //cout << isSorted(arr) << endl;
-    arr3 = Merge(&arr1, &arr2);
-    Display(*arr3);
-    arr3 = UnionS(&arr1, &arr2);
-    Display(*arr3);
-    arr3 = IntersectionS(&arr1, &arr2);
-    Display(*arr3);
-    arr3 = DifferenceS(&arr1, &arr2);
-    Display(*arr3);
+    // arr3 = Merge(&arr1, &arr2);
+    //Display(*arr3); 
+    //arr3 = UnionS(&arr1, &arr2);
+    //Display(*arr3);
+    //arr3 = IntersectionS(&arr1, &arr2);
+    //Display(*arr3);
+    //arr3 = DifferenceS(&arr1, &arr2);
+    //Display(*arr3);
     return 0;
 }
