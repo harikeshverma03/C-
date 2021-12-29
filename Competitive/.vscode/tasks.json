@@ -8,9 +8,13 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-m32", "-g","-o", "test.exe", "hari_edit1.cpp" 
+                "-m32",
+                "-std=c++14",
+                "-g",
+                "-o",
+                "myfile.exe",
+                "p1.cpp"
             ],
-            "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true

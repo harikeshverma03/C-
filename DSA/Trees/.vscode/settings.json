@@ -6,7 +6,11 @@
         "string": "cpp",
         "string_view": "cpp",
         "new": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "*.tcc": "cpp",
+        "sstream": "cpp",
+        "regex": "cpp",
+        "initializer_list": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }
