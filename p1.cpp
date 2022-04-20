@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include <conio.h>
 #pragma GCC optimize("O3", "unroll-loops")
 #pragma GCC target("avx2")
 #define ll long long int
@@ -152,26 +153,19 @@ ll max(ll a,ll b){
     return b;
 }
 
-void solve(){
-    ll n; cin >> n;
-    vector<ll> vec(n);
-    for(int i = 0; i < n; i++) cin >> vec[i];
-    vector<vector<ll>> adj(n+1);
-    for(int i = 0; i < n; i++){
-        int u, v; cin >>u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-    
+
+void solve(int n){  
+    int a = 1, b = 1;
+    cout << (++a || ++b) << endl;
+    cout << a << " " << b << endl;
 }
 
 
 int main(){
     IOS;
-    
     ll t; cin >> t;
     while(t--){
-        solve();
+        solve(2);
     }
     return 0;
 }

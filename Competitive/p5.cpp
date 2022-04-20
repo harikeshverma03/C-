@@ -39,9 +39,8 @@
 #define F_OR4(i, b, e, s) F_OR(i, b, e, s)
 #define GET5(a, b, c, d, e, ...) e
 #define F_ORC(...) GET5(_VA_ARGS_, F_OR4, F_OR3, F_OR2, F_OR1)
-#define forn(...)   \
-    F_ORC(_VA_ARGS) \
-    (VA_ARGS_)
+#define forn(...) F_ORC(_VA_ARGS) \
+(VA_ARGS_)
 #define pi 3.141592653589793238
 #define google() cout << "Case #" << i << ": ";
 ll MOD = 1e9 + 7;
@@ -180,16 +179,70 @@ ll max(ll a, ll b)
         return a;
     return b;
 }
-bool check(int n)
+bool isPrime(ll temp)
 {
-    int i = sqrt(n);
-    if (i * i == n)
-        return true;
-    else
-        return false;
+    bool got = false;
+    for (ll j = 2; j * j <= temp; j++)
+    {
+        if (temp % j == 0)
+        {
+            got = true;
+            break;
+        }
+    }
+    return !got;
+}
+ll check(ll med)
+{
+    vector<int> temp;
+    while (med > 0)
+    {
+        if (med % 2 == 0)
+            temp.push_back(1);
+        else
+            temp.push_back(0);
+        med /= 2;
+    }
+    // reverse(temp.begin(), temp.end());
+    ll k = 1, ans = 0;
+    for (int i = 0; i < temp.size(); i++)
+    {
+        ans += (temp[i] * k);
+        k *= 2;
+    }
+    return ans;
+}
+map<int, int> mp;
+void fill()
+{
+    int maxi = 2050, i = 1, count = 0;
+    while (i < maxi)
+    {
+        mp[i] = count;
+        count++;
+        i *= 2;
+    }
+}
+int countTeams(int num, vector<int> &skills, int minAssociates, int minLevel, int maxLevel)
+{
+    sort(skills.begin(), skills.end());
+    int count = 0;
+    for (int i = 0; i < skills.size() - minAssociates; i++)
+    {
+        if (skills[i] >= minLevel && skills[i + minAssociates] <= maxLevel)
+            count++;
+    }
+    return count;
 }
 void solve()
 {
+    int num, mini, maxi, minass;
+    cin >> num;
+    vector<int> skills(num);
+    for (int i = 0; i < num; i++)
+        cin >> skills[i];
+    cin >> minass >> mini >> maxi;
+    cout << countTeams(num, skills, minass, mini, maxi) << "\n";
 }
 
 int main()
@@ -197,7 +250,6 @@ int main()
     IOS;
     ll t;
     cin >> t;
-
     while (t--)
     {
         solve();

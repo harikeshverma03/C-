@@ -153,25 +153,54 @@ ll max(ll a, ll b) {
 }
 
 void solve() {
-    ll n, m;
-    cin >> n >> m;
-    ll x_start, y_start;
-    cin >> y_start >> x_start;
-    ll x_end, y_end;
-    cin >> y_end >> x_end;
-    ll ans = INT_MAX;
-    if (x_start == x_end || y_start == y_end)
-        cout << 0 << "\n";
-    else if (y_end > y_start && x_end > x_start)
-        cout << min(y_end - y_start, x_end - x_start) << "\n";
-    else {
-        if (y_end > y_start)
-            ans = y_end - y_start;
-        else if (x_end > x_start)
-            ans = x_end - x_start;
-        ans = min(ans, (n - y_end) + (n - y_start));
-        ans = min(ans, (m - x_end) + (m - x_start));
-        cout << ans << "\n";
+    ll n; cin >> n;
+    vector<vector<ll>> vec;
+    for (ll i = 0; i < n; i++) {
+        vector<ll> temp(3);
+        for (ll j = 0; j < 3; j++) cin >> temp[j];
+        vec.push_back(temp);
+    }
+    vector<ll> ans(n, 0);
+    priority_queue < pair<ll, vector<ll> >, vector<pair<ll, vector<ll>>>, greater<pair<ll, vector<ll>> > > left;
+    priority_queue<pair<ll, vector<ll>>> right;
+    ll lefti, righti, left_cost, right_cost;
+    for (ll i = 0; i < n; i++) {
+
+        pair<ll, vector<ll> > p, p1;
+        left_cost = right_cost = INT_MAX;
+        left.push({ vec[i][0], vec[i] });
+        right.push({ vec[i][1], vec[i] });
+        righti = right.top().first;
+        while (!right.empty() && righti == right.top().first) {
+            if (right_cost > right.top().second[2]) {
+                p = right.top();
+                right_cost = right.top().second[2];
+            }
+            right.pop();
+        }
+        right.push(p);
+        lefti = left.top().first;
+        while (!left.empty() && lefti == left.top().first) {
+            if (left_cost > left.top().second[2]) {
+                p1 = left.top();
+                left_cost = left.top().second[2];
+            }
+            left.pop();
+        }
+        left.push(p1);
+        if (p1.second[0] == p.second[0] && p1.second[1] == p.second[1])
+            ans[i] = min(right_cost, left_cost);
+        else if (p1.second[0] >= p.second[0] && p1.second[1] <= p.second[1])
+            ans[i] = right_cost;
+        else if (p1.second[0] <= p.second[0] && p1.second[1] >= p.second[1])
+            ans[i] = left_cost;
+        else
+            ans[i] = right_cost + left_cost;
+        //cout << left.top().second[0] << " " << left.top().second[1] << " " << left.top().second[2] << endl;
+        //cout << right.top().second[0] << " " << right.top().second[1] << " " << right.top().second[2] << endl;
+    }
+    for (auto it : ans) {
+        cout << it << "\n";
     }
 }
 

@@ -39,9 +39,8 @@
 #define F_OR4(i, b, e, s) F_OR(i, b, e, s)
 #define GET5(a, b, c, d, e, ...) e
 #define F_ORC(...) GET5(_VA_ARGS_, F_OR4, F_OR3, F_OR2, F_OR1)
-#define forn(...)   \
-    F_ORC(_VA_ARGS) \
-    (VA_ARGS_)
+#define forn(...) F_ORC(_VA_ARGS) \
+(VA_ARGS_)
 #define pi 3.141592653589793238
 #define google() cout << "Case #" << i << ": ";
 ll MOD = 1e9 + 7;
@@ -180,16 +179,105 @@ ll max(ll a, ll b)
         return a;
     return b;
 }
-bool check(int n)
+bool isPrime(ll temp)
 {
-    int i = sqrt(n);
-    if (i * i == n)
-        return true;
-    else
-        return false;
+    bool got = false;
+    for (ll j = 2; j * j <= temp; j++)
+    {
+        if (temp % j == 0)
+        {
+            got = true;
+            break;
+        }
+    }
+    return !got;
+}
+ll check(ll med)
+{
+    vector<int> temp;
+    while (med > 0)
+    {
+        if (med % 2 == 0)
+            temp.push_back(1);
+        else
+            temp.push_back(0);
+        med /= 2;
+    }
+    // reverse(temp.begin(), temp.end());
+    ll k = 1, ans = 0;
+    for (int i = 0; i < temp.size(); i++)
+    {
+        ans += (temp[i] * k);
+        k *= 2;
+    }
+    return ans;
+}
+map<int, int> mp;
+void fill()
+{
+    int maxi = 2050, i = 1, count = 0;
+    while (i < maxi)
+    {
+        mp[i] = count;
+        count++;
+        i *= 2;
+    }
+}
+ll n, m;
+int reached = -1;
+int dir[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+void dfs(int i, int j, vector<vector<int>> visited, vector<vector<char>> vec)
+{
+    queue<vector<int>> q;
+    q.push({i, j, 0});
+    visited[i][j] = 0;
+    while (!q.empty())
+    {
+        vector<int> p = q.front();
+        q.pop();
+        for (int k = 0; k < 4; k++)
+        {
+            int x = p[0] + dir[k][0];
+            int y = p[1] + dir[k][1];
+            if (x >= 0 && x < n && y >= 0 && y < m && visited[x][y] > p[2] + 1 && vec[x][y] != '#')
+            {
+                visited[x][y] = p[2] + 1;
+                q.push({x, y, p[2] + 1});
+                if (vec[x][y] == 'B')
+                    reached = p[2] + 1;
+            }
+        }
+    }
 }
 void solve()
 {
+    cin >> n >> m;
+    vector<vector<char>> vec(n, vector<char>(m));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> vec[i][j];
+        }
+    }
+    vector<vector<int>> visited(n, vector<int>(m, INT_MAX));
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (vec[i][j] == 'A')
+                dfs(i, j, visited, vec);
+        }
+    }
+    if (reached == -1)
+    {
+        cout << "NO" << endl;
+    }
+    else
+    {
+        cout << "YES" << endl;
+        cout << reached << endl;
+    }
 }
 
 int main()
@@ -197,10 +285,21 @@ int main()
     IOS;
     ll t;
     cin >> t;
-
     while (t--)
     {
         solve();
     }
     return 0;
 }
+// 1 - 2 3 4 5 6 9 8 -------2
+// 2 - 1 4 5 6 7 9 8-------2
+// 3 - 1 4 5 6 7------- 4
+// 4 - 1 2 3 5 7-------4
+// 5 - 1 2 3 4 7-------4
+// 6 - 1 2 3-------6
+// 7 - 2 3 4 5-------5
+// 8 - 1 2 10 -------6
+// 9 - 1 2 10 -------6
+// 10 - 9 8 -------7
+// 10 6 7
+// 9 8 6 4
